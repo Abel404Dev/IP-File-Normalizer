@@ -18,7 +18,7 @@
 
 ---
 
-### ⚡ Fast • Lightweight • Memory Efficient • Multi-File IP Processing • Cross-Platform • Self-Contained
+### ⚡ Fast • Lightweight • Memory Efficient • Multi-File IP Processing • Cross-Platform
 
 A high-performance .NET 10 utility for cleaning, normalizing, merging, deduplicating and sorting massive IPv4 datasets.
 
