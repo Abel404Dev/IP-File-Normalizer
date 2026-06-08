@@ -2,7 +2,7 @@
 
 
 
-!\[Banner](assets/banner.png)
+![Banner](assets/banner.png)
 
 
 [![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
