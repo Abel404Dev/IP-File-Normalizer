@@ -323,13 +323,13 @@ chmod +x IP.File.Normalizer_macos_x64
 ### Single TXT File
 
 ```text
-C:\\IPs\\file1.txt
+C:\IPs\file1.txt
 ```
 
 ### Multiple TXT Files
 
 ```text
-'C:\\IPs\\file1.txt',"C:\\IPs\\file2.txt" C:\\IPs\\file3.txt
+'C:\IPs\file1.txt',"C:\IPs\file2.txt" C:\IPs\file3.txt
 ```
 
 ### Available Operations
@@ -433,4 +433,5 @@ MIT License
 ---
 
 ⭐ If this project helped you, consider giving it a Star.
+
 Made with ❤️ and ☕ for the networking & security community.
