@@ -1,45 +1,43 @@
-\# 🚀 IP File Normalizer
+# 🚀 IP File Normalizer
 
 
 
-!\[Banner](assets/banner.png)
 ![Banner](assets/banner.png)
 
 
+[![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
 
-\[!\[.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
+[![Cross Platform](https://img.shields.io/badge/Cross--Platform-Windows%20%7C%20Linux%20%7C%20macOS-success?style=flat-square)]()
 
-\[!\[Cross Platform](https://img.shields.io/badge/Cross--Platform-Windows%20%7C%20Linux%20%7C%20macOS-success?style=flat-square)]()
+[![Windows](https://img.shields.io/badge/Windows-Supported-0078D6?logo=windows)]()
 
-\[!\[Windows](https://img.shields.io/badge/Windows-Supported-0078D6?logo=windows)]()
+[![Linux](https://img.shields.io/badge/Linux-Supported-FCC624?logo=linux&logoColor=black)]()
 
-\[!\[Linux](https://img.shields.io/badge/Linux-Supported-FCC624?logo=linux\&logoColor=black)]()
+[![macOS](https://img.shields.io/badge/macOS-Supported-000000?logo=apple)]()
 
-\[!\[macOS](https://img.shields.io/badge/macOS-Supported-000000?logo=apple)]()
+[![Self-Contained](https://img.shields.io/badge/Self--Contained-Yes-success)]()
 
-\[!\[Self-Contained](https://img.shields.io/badge/Self--Contained-Yes-success)]()
+[![License](https://img.shields.io/badge/License-MIT-green)]()
 
-\[!\[License](https://img.shields.io/badge/License-MIT-green)]()
-
-\[!\[Version](https://img.shields.io/badge/Version-1.0.1-orange)]()
-
-
-
-\[!\[GitHub Stars](https://img.shields.io/github/stars/Abel404Dev/IP-File-Normalizer?style=for-the-badge)]()
-
-\[!\[GitHub Forks](https://img.shields.io/github/forks/Abel404Dev/IP-File-Normalizer?style=for-the-badge)]()
-
-\[!\[GitHub Issues](https://img.shields.io/github/issues/Abel404Dev/IP-File-Normalizer?style=for-the-badge)]()
-
-\[!\[GitHub Downloads](https://img.shields.io/github/downloads/Abel404Dev/IP-File-Normalizer/total?style=for-the-badge)]()
+[![Version](https://img.shields.io/badge/Version-1.0.1-orange)]()
 
 
 
-\---
+[![GitHub Stars](https://img.shields.io/github/stars/Abel404Dev/IP-File-Normalizer?style=for-the-badge)]()
+
+[![GitHub Forks](https://img.shields.io/github/forks/Abel404Dev/IP-File-Normalizer?style=for-the-badge)]()
+
+[![GitHub Issues](https://img.shields.io/github/issues/Abel404Dev/IP-File-Normalizer?style=for-the-badge)]()
+
+[![GitHub Downloads](https://img.shields.io/github/downloads/Abel404Dev/IP-File-Normalizer/total?style=for-the-badge)]()
 
 
 
-\### ⚡ Fast • Lightweight • Memory Efficient • Multi-File IP Processing • Cross-Platform • Self-Contained
+---
+
+
+
+### ⚡ Fast • Lightweight • Memory Efficient • Multi-File IP Processing • Cross-Platform • Self-Contained
 
 
 
@@ -47,53 +45,53 @@ A high-performance .NET 10 utility for cleaning, normalizing, merging, deduplica
 
 
 
-\*\*IP File Normalizer\*\* is distributed as a \*\*Self-Contained Application\*\*, allowing end users to run it without installing the .NET SDK or .NET Runtime.
+**IP File Normalizer** is distributed as a **Self-Contained Application**, allowing end users to run it without installing the .NET SDK or .NET Runtime.
 
 
 
-\---
+---
 
 
 
-\## 📑 Table of Contents
+## 📑 Table of Contents
 
 
 
-\- \[✨ Features](#-features)
+- [✨ Features](#-features)
 
-\- \[📖 Overview](#-overview)
+- [📖 Overview](#-overview)
 
-\- \[📁 Supported Input Formats](#-supported-input-formats)
+- [📁 Supported Input Formats](#-supported-input-formats)
 
-\- \[💻 User Interface](#-user-interface)
+- [💻 User Interface](#-user-interface)
 
-\- \[📈 Statistics Engine](#-statistics-engine)
+- [📈 Statistics Engine](#-statistics-engine)
 
-\- \[📂 Output Structure](#-output-structure)
+- [📂 Output Structure](#-output-structure)
 
-\- \[⚡ Performance](#-performance)
+- [⚡ Performance](#-performance)
 
-\- \[🚀 Quick Start](#-quick-start)
+- [🚀 Quick Start](#-quick-start)
 
-\- \[📋 Usage](#-usage)
+- [📋 Usage](#-usage)
 
-\- \[📸 Examples](#-examples)
+- [📸 Examples](#-examples)
 
-\- \[🎯 Use Cases](#-use-cases)
+- [🎯 Use Cases](#-use-cases)
 
-\- \[🛠 Requirements](#-requirements)
+- [🛠 Requirements](#-requirements)
 
-\- \[🤝 Contributing](#-contributing)
+- [🤝 Contributing](#-contributing)
 
-\- \[📜 License](#-license)
-
-
-
-\---
+- [📜 License](#-license)
 
 
 
-\## 📖 Overview
+---
+
+
+
+## 📖 Overview
 
 
 
@@ -101,37 +99,37 @@ IP File Normalizer is a high-speed cross-platform command-line application desig
 
 
 
-\### 🎯 Core Capabilities
+### 🎯 Core Capabilities
 
 
 
-\- 🔗 Merge multiple TXT files
+- 🔗 Merge multiple TXT files
 
-\- 🧹 Remove empty lines
+- 🧹 Remove empty lines
 
-\- 🔁 Remove duplicates
+- 🔁 Remove duplicates
 
-\- 🎯 Remove invalid IPs
+- 🎯 Remove invalid IPs
 
-\- 📝 Strip unwanted text
+- 📝 Strip unwanted text
 
-\- 🔌 Remove ports
+- 🔌 Remove ports
 
-\- 📊 Sort IPv4 addresses
+- 📊 Sort IPv4 addresses
 
-\- 📁 Generate categorized result files
+- 📁 Generate categorized result files
 
-\- ⚡ Process massive datasets efficiently
+- ⚡ Process massive datasets efficiently
 
-\- 🌍 Run on Windows, Linux and macOS
-
-
-
-\---
+- 🌍 Run on Windows, Linux and macOS
 
 
 
-\## 📁 Supported Input Formats
+---
+
+
+
+## 📁 Supported Input Formats
 
 
 
@@ -159,7 +157,7 @@ IP File Normalizer is designed to work exclusively with plain text files.
 
 
 
-\### Supported Examples
+### Supported Examples
 
 
 
@@ -177,7 +175,7 @@ targets.txt
 
 
 
-\### Unsupported Examples
+### Unsupported Examples
 
 
 
@@ -195,11 +193,11 @@ data.xml
 
 
 
-\---
+---
 
 
 
-\## ✨ Features
+## ✨ Features
 
 
 
@@ -229,11 +227,11 @@ data.xml
 
 
 
-\---
+---
 
 
 
-\## 🚀 ElonMod Pipeline
+## 🚀 ElonMod Pipeline
 
 
 
@@ -269,15 +267,15 @@ One click. Fully cleaned dataset.
 
 
 
-\---
+---
 
 
 
-\## 💻 User Interface
+## 💻 User Interface
 
 
 
-IP File Normalizer is a \*\*CLI (Command-Line Interface)\*\* application.
+IP File Normalizer is a **CLI (Command-Line Interface)** application.
 
 
 
@@ -289,23 +287,23 @@ Terminal / Console Based Application
 
 
 
-\### Supported Environments
+### Supported Environments
 
 
 
-\- Windows Terminal
+- Windows Terminal
 
-\- Command Prompt (CMD)
+- Command Prompt (CMD)
 
-\- PowerShell
+- PowerShell
 
-\- Linux Terminal
+- Linux Terminal
 
-\- macOS Terminal
+- macOS Terminal
 
 
 
-> \*\*Note\*\*
+> **Note**
 
 >
 
@@ -317,11 +315,11 @@ Terminal / Console Based Application
 
 
 
-\---
+---
 
 
 
-\## 📈 Statistics Engine
+## 📈 Statistics Engine
 
 
 
@@ -329,33 +327,33 @@ Before any operation starts, the application automatically analyzes the dataset.
 
 
 
-\### Collected Metrics
+### Collected Metrics
 
 
 
-\- Total Lines
+- Total Lines
 
-\- Empty Lines
+- Empty Lines
 
-\- Duplicate Lines
+- Duplicate Lines
 
-\- Lines With Text
+- Lines With Text
 
-\- Lines With Ports
+- Lines With Ports
 
-\- Used Ports
+- Used Ports
 
-\- Total IPs
+- Total IPs
 
-\- Invalid IPs
+- Invalid IPs
 
-\- Duplicate IPs
+- Duplicate IPs
 
-\- Valid IPv4 Count
+- Valid IPv4 Count
 
 
 
-\### Example
+### Example
 
 
 
@@ -375,11 +373,11 @@ Valid IPv4s       : 974,373
 
 
 
-\---
+---
 
 
 
-\## 📂 Output Structure
+## 📂 Output Structure
 
 
 
@@ -423,17 +421,17 @@ Generated filenames:
 
 ```text
 
-IP File Normalizer_06-15-2025\_12-45-11\_ElonMod.txt
+IP File Normalizer_06-15-2025_12-45-11_ElonMod.txt
 
 ```
 
 
 
-\---
+---
 
 
 
-\## ⚡ Performance
+## ⚡ Performance
 
 
 
@@ -441,21 +439,21 @@ Built for large-scale datasets.
 
 
 
-\### Technologies
+### Technologies
 
 
 
-\- ConcurrentDictionary
+- ConcurrentDictionary
 
-\- Parallel Processing
+- Parallel Processing
 
-\- Async File Operations
+- Async File Operations
 
-\- Memory-Based Processing
+- Memory-Based Processing
 
 
 
-\### Optimized For
+### Optimized For
 
 
 
@@ -479,15 +477,15 @@ Built for large-scale datasets.
 
 
 
-\---
+---
 
 
 
-\## 🚀 Quick Start
+## 🚀 Quick Start
 
 
 
-\### Clone
+### Clone
 
 
 
@@ -499,7 +497,7 @@ git clone https://github.com/Abel404Dev/IP-File-Normalizer.git
 
 
 
-\### Enter Directory
+### Enter Directory
 
 
 
@@ -511,7 +509,7 @@ cd IP-File-Normalizer
 
 
 
-\### Build From Source
+### Build From Source
 
 
 
@@ -523,7 +521,7 @@ dotnet build
 
 
 
-\### Run From Source
+### Run From Source
 
 
 
@@ -535,23 +533,23 @@ dotnet run
 
 
 
-\### Run Release Build
+### Run Release Build
 
 
 
-\#### Windows
+#### Windows
 
 
 
 ```powershell
 
-.\IP.File.Normalizer_windows_x64.exe
+.IP.File.Normalizer_windows_x64.exe
 
 ```
 
 
 
-\#### Linux
+#### Linux
 
 
 
@@ -565,7 +563,7 @@ chmod +x IP.File.Normalizer_linux_x64
 
 
 
-\#### macOS
+#### macOS
 
 
 
@@ -579,39 +577,39 @@ chmod +x IP.File.Normalizer_macos_x64
 
 
 
-\---
+---
 
 
 
-\## 📋 Usage
+## 📋 Usage
 
 
 
-\### Single TXT File
-
-
-
-```text
-
-C:\\IPs\\file1.txt
-
-```
-
-
-
-\### Multiple TXT Files
+### Single TXT File
 
 
 
 ```text
 
-'C:\\IPs\\file1.txt',"C:\\IPs\\file2.txt" C:\\IPs\\file3.txt
+C:IPsfile1.txt
 
 ```
 
 
 
-\### Available Operations
+### Multiple TXT Files
+
+
+
+```text
+
+'C:IPsfile1.txt',"C:IPsfile2.txt" C:IPsfile3.txt
+
+```
+
+
+
+### Available Operations
 
 
 
@@ -641,15 +639,15 @@ C:\\IPs\\file1.txt
 
 
 
-\---
+---
 
 
 
-\## 📸 Examples
+## 📸 Examples
 
 
 
-\### Input
+### Input
 
 
 
@@ -671,7 +669,7 @@ Google DNS 8.8.8.8:53
 
 
 
-\### Output (ElonMod)
+### Output (ElonMod)
 
 
 
@@ -685,67 +683,67 @@ Google DNS 8.8.8.8:53
 
 
 
-\---
+---
 
 
 
-\## 🎯 Use Cases
+## 🎯 Use Cases
 
 
 
-\- 🌐 Proxy List Cleanup
+- 🌐 Proxy List Cleanup
 
-\- 🔎 OSINT Datasets
+- 🔎 OSINT Datasets
 
-\- 🛡 Firewall Imports
+- 🛡 Firewall Imports
 
-\- 📡 Network Inventory Management
+- 📡 Network Inventory Management
 
-\- 🔬 Security Research
+- 🔬 Security Research
 
-\- 🚨 Vulnerability Scanning Preparation
+- 🚨 Vulnerability Scanning Preparation
 
-\- 📊 Large IPv4 Data Processing
+- 📊 Large IPv4 Data Processing
 
-\- 📦 Bulk TXT File Normalization
+- 📦 Bulk TXT File Normalization
 
-\- ⚙️ Data Preparation Pipelines
-
-
-
-\---
+- ⚙️ Data Preparation Pipelines
 
 
 
-\## 🛠 Requirements
+---
 
 
 
-\### For End Users
+## 🛠 Requirements
 
 
 
-\*\*None.\*\*
+### For End Users
 
 
 
-Official releases are distributed as \*\*Self-Contained Executables\*\*.
+**None.**
 
 
 
-You do \*\*NOT\*\* need to install:
+Official releases are distributed as **Self-Contained Executables**.
 
 
 
-\- .NET SDK
-
-\- .NET Runtime
-
-\- Additional Dependencies
+You do **NOT** need to install:
 
 
 
-\### Supported Platforms
+- .NET SDK
+
+- .NET Runtime
+
+- Additional Dependencies
+
+
+
+### Supported Platforms
 
 
 
@@ -761,7 +759,7 @@ You do \*\*NOT\*\* need to install:
 
 
 
-\### For Developers
+### For Developers
 
 
 
@@ -769,7 +767,7 @@ To build the project from source:
 
 
 
-\- .NET 10 SDK
+- .NET 10 SDK
 
 
 
@@ -781,11 +779,11 @@ https://dotnet.microsoft.com/download
 
 
 
-\---
+---
 
 
 
-\## 🤝 Contributing
+## 🤝 Contributing
 
 
 
@@ -797,19 +795,19 @@ If you have ideas, bug reports or improvements:
 
 
 
-\- Open an Issue
+- Open an Issue
 
-\- Submit a Pull Request
+- Submit a Pull Request
 
-\- Suggest New Features
-
-
-
-\---
+- Suggest New Features
 
 
 
-\## 📜 License
+---
+
+
+
+## 📜 License
 
 
 
@@ -817,7 +815,7 @@ MIT License
 
 
 
-\---
+---
 
 
 
