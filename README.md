@@ -2,25 +2,18 @@
 
 ![Banner](assets/banner.png)
 
-
 [![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
 [![Self-Contained](https://img.shields.io/badge/Self--Contained-Yes-success)]()
 [![Version](https://img.shields.io/badge/Version-1.0.1-orange)]()
+[![License](https://img.shields.io/badge/License-MIT-green)]()
 
 [![Windows](https://img.shields.io/badge/Windows-Supported-0078D6?logo=windows)]()
 [![Linux](https://img.shields.io/badge/Linux-Supported-FCC624?logo=linux\&logoColor=black)]()
 [![macOS](https://img.shields.io/badge/macOS-Supported-000000?logo=apple)]()
 
-[![License](https://img.shields.io/badge/License-MIT-green)]()
-
-
-
 [![GitHub Stars](https://img.shields.io/github/stars/Abel404Dev/IP-File-Normalizer?style=for-the-badge)]()
-
 [![GitHub Forks](https://img.shields.io/github/forks/Abel404Dev/IP-File-Normalizer?style=for-the-badge)]()
-
 [![GitHub Issues](https://img.shields.io/github/issues/Abel404Dev/IP-File-Normalizer?style=for-the-badge)]()
-
 [![GitHub Downloads](https://img.shields.io/github/downloads/Abel404Dev/IP-File-Normalizer/total?style=for-the-badge)]()
 
 ---
