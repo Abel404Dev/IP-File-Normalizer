@@ -4,20 +4,14 @@
 
 
 [![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
-
-[![Cross Platform](https://img.shields.io/badge/Cross--Platform-Windows%20%7C%20Linux%20%7C%20macOS-success?style=flat-square)]()
+[![Self-Contained](https://img.shields.io/badge/Self--Contained-Yes-success)]()
+[![Version](https://img.shields.io/badge/Version-1.0.1-orange)]()
 
 [![Windows](https://img.shields.io/badge/Windows-Supported-0078D6?logo=windows)]()
-
 [![Linux](https://img.shields.io/badge/Linux-Supported-FCC624?logo=linux\&logoColor=black)]()
-
 [![macOS](https://img.shields.io/badge/macOS-Supported-000000?logo=apple)]()
 
-[![Self-Contained](https://img.shields.io/badge/Self--Contained-Yes-success)]()
-
 [![License](https://img.shields.io/badge/License-MIT-green)]()
-
-[![Version](https://img.shields.io/badge/Version-1.0.1-orange)]()
 
 
 
