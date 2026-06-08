@@ -257,9 +257,13 @@ Built for large-scale datasets.
 ### Optimized For
 
 ✅ Hundreds of thousands of lines
+
 ✅ Millions of IPv4 addresses
+
 ✅ Multi-file processing
+
 ✅ High-speed cleanup operations
+
 ✅ Large TXT datasets
 
 ---
