@@ -11,11 +11,6 @@
 [![Linux](https://img.shields.io/badge/Linux-Supported-FCC624?logo=linux\&logoColor=black)]()
 [![macOS](https://img.shields.io/badge/macOS-Supported-000000?logo=apple)]()
 
-[![GitHub Stars](https://img.shields.io/github/stars/Abel404Dev/IP-File-Normalizer?style=for-the-badge)]()
-[![GitHub Forks](https://img.shields.io/github/forks/Abel404Dev/IP-File-Normalizer?style=for-the-badge)]()
-[![GitHub Issues](https://img.shields.io/github/issues/Abel404Dev/IP-File-Normalizer?style=for-the-badge)]()
-[![GitHub Downloads](https://img.shields.io/github/downloads/Abel404Dev/IP-File-Normalizer/total?style=for-the-badge)]()
-
 ---
 
 ### ⚡ Fast • Lightweight • Memory Efficient • Multi-File IP Processing • Cross-Platform • Self-Contained
