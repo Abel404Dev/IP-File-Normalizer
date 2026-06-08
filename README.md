@@ -239,7 +239,7 @@ Results
 Generated filenames:
 
 ```text
-IP File Normalizer_06-15-2025\_12-45-11\_ElonMod.txt
+IP File Normalizer_06-15-2025_12-45-11_ElonMod.txt
 ```
 
 ---
