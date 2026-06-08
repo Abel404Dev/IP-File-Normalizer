@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- ==================== icon ==================== -->
+    <ApplicationIcon>assets/icon.ico</ApplicationIcon>
+	
+	<!-- ==================== app information ==================== -->
+	<Company>Caspian</Company>
+	<Authors>Abel</Authors>
+	<Product>IP File Normalizer</Product>
+	<Description>Cleanup Lines</Description>
+	<Copyright>Copyright © 2026 Caspian-Abel</Copyright>
+	
+	<Version>1.0.1</Version>
+	<AssemblyVersion>1.0.0.0</AssemblyVersion>
+	<FileVersion>1.0.0.0</FileVersion>
+	<InformationalVersion>1.0.1</InformationalVersion>
+	
+	<!-- ==================== publish settings ==================== -->
+	<PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PublishTrimmed>false</PublishTrimmed>
+    <TrimMode>full</TrimMode>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+	<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+	<!-- <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+	<PublishReadyToRun>true</PublishReadyToRun> -->
+	<InvariantGlobalization>true</InvariantGlobalization>
+	
+	<!-- ==================== default basic ==================== -->
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>IP_File_Normalizer</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <SignAssembly>True</SignAssembly>
+  </PropertyGroup>
+
+</Project>
