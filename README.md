@@ -4,7 +4,7 @@
 
 [![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
 [![Self-Contained](https://img.shields.io/badge/Self--Contained-Yes-success)]()
-[![Version](https://img.shields.io/badge/Version-1.0.1-orange)]()
+[![Version](https://img.shields.io/badge/Version-2.0.0-orange)]()
 [![License](https://img.shields.io/badge/License-MIT-green)]()
 
 [![Windows](https://img.shields.io/badge/Windows-Supported-0078D6?logo=windows)]()
@@ -124,15 +124,47 @@ data.xml
 | Feature | Description |
 |----------|------------|
 | 🧹 NullFix | Remove empty lines |
-| 🔁 DeDup | Remove duplicate lines and IPs |
+| 🔁 DeDup | Remove duplicate lines and duplicate IPv4 addresses |
 | 🎯 InFix | Remove invalid IPv4 addresses |
-| 📝 LetOut | Remove unwanted text around IPs |
+| 📝 LetOut | Remove unwanted text before and after IP addresses |
 | 🔌 DePort | Remove ports from IP:PORT entries |
-| 📈 SortUp | Ascending IPv4 sort |
-| 📉 SortDown | Descending IPv4 sort |
+| 📈 SortUp | Sort IPv4 addresses ascending |
+| 📉 SortDown | Sort IPv4 addresses descending |
 | 🔥 Del4 | Remove all IPv4 addresses |
-| 🔗 Merger | Merge multiple TXT files |
+| 🔗 Merger | Merge multiple TXT files into one file |
 | 🚀 ElonMod | Full automatic cleanup pipeline |
+| 📊 Statistics Engine | Analyze dataset before processing |
+| 📂 Smart Output Routing | Automatically store results in categorized folders |
+| ⚡ Multi-File Processing | Process multiple TXT files simultaneously |
+| 🧠 Duplicate Detection Engine | Detect duplicate lines and duplicate IPs |
+| 📋 Port Analysis | Detect and report used ports |
+| 💾 Large Dataset Support | Optimized for very large TXT files |
+
+## 🧠 Processing Workflow
+
+```text
+TXT Files
+    ↓
+📂 Validation
+    ↓
+📥 Loading
+    ↓
+📊 Statistics Collection
+    ↓
+🛠 User Operation Selection
+    ↓
+⚙️ Processing
+    ↓
+💾 Result Generation
+```
+
+Before processing begins, every input file is validated:
+
+✅ File exists
+✅ TXT extension
+✅ Non-empty file
+
+Invalid files are reported individually before execution continues.
 
 ---
 
@@ -152,6 +184,129 @@ DePort
 SortUp
 ```
 One click. Fully cleaned dataset.
+
+## ⚠️ Operation Priority Rules
+
+Some operations have higher priority than others.
+
+The application automatically resolves conflicting selections using the following rules:
+
+### 🥇 Priority #1 — ElonMod
+
+If all ElonMod components are selected:
+
+```text
+NullFix
+DeDup
+InFix
+LetOut
+DePort
+SortUp
+```
+
+then the application switches to:
+
+```text
+🚀 ElonMod
+```
+
+and ignores all other selected options.
+
+Example:
+
+```text
+✅ NullFix
+✅ DeDup
+✅ InFix
+✅ LetOut
+✅ DePort
+✅ SortUp
+✅ SortDown
+✅ Del4
+```
+
+Result:
+
+```text
+🚀 ElonMod
+```
+
+All additional options are ignored.
+
+---
+
+### 🥈 Priority #2 — Merger
+
+If `🔗 Merger` is selected, it overrides every other option except ElonMod.
+
+Example:
+
+```text
+✅ Merger
+✅ NullFix
+✅ DeDup
+✅ SortUp
+```
+
+Result:
+
+```text
+🔗 Merger
+```
+
+The application only merges input files.
+
+---
+
+### 🥉 Priority #3 — Sort Conflict Resolution
+
+If both sorting modes are selected:
+
+```text
+📈 SortUp
+📉 SortDown
+```
+
+then:
+
+```text
+📈 SortUp
+```
+
+takes priority automatically.
+
+Example:
+
+```text
+✅ NullFix
+✅ DeDup
+✅ SortUp
+✅ SortDown
+```
+
+Result:
+
+```text
+NullFix
+DeDup
+📈 SortUp
+```
+
+---
+
+### Effective Priority Order
+
+```text
+🚀 ElonMod
+      ↓
+🔗 Merger
+      ↓
+📈 SortUp (when SortUp & SortDown are both selected)
+      ↓
+All Other Operations
+```
+
+These rules ensure deterministic behavior and prevent conflicting processing pipelines.
 
 ---
 
@@ -178,20 +333,22 @@ Terminal / Console Based Application
 ---
 
 ## 📈 Statistics Engine
-Before any operation starts, the application automatically analyzes the dataset.
+The application automatically collects approximate statistics before any modification is performed.
 
 ### Collected Metrics
 
-- Total Lines
-- Empty Lines
-- Duplicate Lines
-- Lines With Text
-- Lines With Ports
-- Used Ports
-- Total IPs
-- Invalid IPs
-- Duplicate IPs
-- Valid IPv4 Count
+- ☠️ Total Lines
+- 🤣 Empty Lines
+- 💩 Duplicate Lines
+- 👎 Lines With Text
+- 👙 Lines With Ports
+- 📜 Used Ports
+- 🥵 Total IPs
+- 🍌 Duplicate IPs
+- 👏 Invalid IPs
+- 💎 Valid IPs
+
+This allows users to understand dataset quality before selecting any operation.
 
 ### Example
 
@@ -206,6 +363,8 @@ Valid IPv4s       : 974,373
 ---
 
 ## 📂 Output Structure
+
+At startup, the application automatically creates the following structure:
 
 ```text
 Results
@@ -223,7 +382,9 @@ Results
 └── Del4
 ```
 
-Generated filenames:
+Result files are automatically routed to the appropriate folder based on the selected operation.
+
+Example:
 
 ```text
 IP File Normalizer_06-15-2025_12-45-11_ElonMod.txt
@@ -232,14 +393,42 @@ IP File Normalizer_06-15-2025_12-45-11_ElonMod.txt
 ---
 
 ## ⚡ Performance
-Built for large-scale datasets.
 
-### Technologies
+Built specifically for large TXT datasets.
+
+### Technologies Used
 
 - ConcurrentDictionary
-- Parallel Processing
-- Async File Operations
-- Memory-Based Processing
+- Parallel.ForEachAsync
+- Async/Await
+- MemoryMappedFile
+- StreamReader
+- StreamWriter
+- Task-Based Processing
+
+### Performance Optimizations
+
+#### 📥 Fast Line Counting
+
+Large files are scanned using MemoryMappedFile, allowing line counting without loading the entire file into memory.
+
+#### ⚡ Parallel Duplicate Detection
+
+Duplicate lines and duplicate IPs are detected using parallel processing across available CPU cores.
+
+#### 💾 Buffered Result Writing
+
+Result files are written asynchronously using buffered streams for maximum throughput.
+
+#### 🧠 Lightweight Memory Usage
+
+Only extracted metadata is stored for each line:
+
+- Original Content
+- IPv4 Address
+- Port
+- Additional Text
+- IPv4 Byte Representation
 
 ### Optimized For
 
@@ -249,9 +438,11 @@ Built for large-scale datasets.
 
 ✅ Multi-file processing
 
-✅ High-speed cleanup operations
-
 ✅ Large TXT datasets
+
+✅ Cross-platform execution
+
+✅ Self-contained deployments
 
 ---
 
@@ -348,7 +539,16 @@ ServerA:192.168.1.1:80
 999.999.999.999
 
 Google DNS 8.8.8.8:53
+
+Proxy => 1.2.3.4
 ```
+
+IP File Normalizer automatically extracts:
+
+- IPv4 addresses
+- Ports
+- Leading text
+- Trailing text
 
 ### Output (ElonMod)
 
@@ -356,7 +556,6 @@ Google DNS 8.8.8.8:53
 8.8.8.8
 192.168.1.1
 ```
-
 ---
 
 ## 🎯 Use Cases
@@ -410,6 +609,37 @@ If you have ideas, bug reports or improvements:
 - Open an Issue
 - Submit a Pull Request
 - Suggest New Features
+
+---
+
+## 🏗 Architecture
+
+### Core Components
+
+| Component | Responsibility |
+|------------|---------------|
+| 🚀 Program | Application workflow |
+| 📂 DirHandler | Directory creation and file validation |
+| 📊 UIHandler | Console UI and progress reporting |
+| 🧠 LineRepository | In-memory data management |
+| 💾 ResultHandler | Result file generation |
+| 🔧 Utility | Parsing, regex extraction and helper methods |
+
+### Processing Model
+
+```text
+Input Files
+      ↓
+LineRepository
+      ↓
+Statistics Engine
+      ↓
+Selected Operation
+      ↓
+ResultHandler
+      ↓
+Output File
+```
 
 ---
 

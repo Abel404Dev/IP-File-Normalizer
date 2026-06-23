@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <!-- ==================== icon ==================== -->
-    <ApplicationIcon>assets/icon.ico</ApplicationIcon>
+    <ApplicationIcon>Assets/icon.ico</ApplicationIcon>
 	
 	<!-- ==================== app information ==================== -->
 	<Company>Caspian</Company>
@@ -36,6 +36,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <SignAssembly>True</SignAssembly>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Spectre.Console" Version="0.57.0" />
+  </ItemGroup>
 
 </Project>

@@ -1,224 +1,105 @@
-﻿using IP_File_Normalizer.Model;
-
-namespace IP_File_Normalizer.Repository
+﻿namespace IP_File_Normalizer.Repository
 {
-    public class LineRepository
+    public class LineRepository : IDisposable
     {
         //fields
-        private ConcurrentDictionary<uint, LineModel> _lines = new();
+        private ConcurrentDictionary<uint, LineModel>? _lines = new();
+        private uint _emptyLines = 0;
+        private uint _duplicatedLines = 0;
+        private uint _linesWithLetters = 0;
+        private uint _linesWithPort = 0;
+        private List<string> _usedPorts = new();
+        private uint _totalIPs = 0;
+        private uint _invalidIPs = 0;
+        private uint _duplicatedIPs = 0;
+        private uint _validIPs = 0;
+
 
         //indexers
-        public string this[uint index]
+        public LineModel? this[uint index]
         {
-            get => $"{((_lines[index].IP != string.Empty) ? _lines[index].IP : null)}{((_lines[index].Port != string.Empty) ? $":{_lines[index].IP}" : null)}{((_lines[index].Letters.Count > 0) ? $"{string.Join(string.Empty, _lines[index].Letters)}" : null)}";
+            get
+            {
+                if (_lines!.ContainsKey(index))
+                    return _lines[index];
+                return null;
+            }
         }
+
 
         //properties
-        public uint TotalLines
-        {
-            get => (uint)_lines.Count;
-        }
-        public uint EmptyLines
-        {
-            get => (uint)_lines.Where(x => string.IsNullOrEmpty(x.Value.Base) || string.IsNullOrWhiteSpace(x.Value.Base)).Count();
-        }
-        public uint DuplicatedLines
-        {
-            get => (uint)_lines.GroupBy(x => x.Value.Base).Where(g => g.Count() > 1).Select(g => g.Key).Count();
-        }
-        public uint LetteredLines
-        {
-            get => (uint)_lines.Where(x => x.Value.Letters.Count > 0).Count();
-        }
-        public uint PortedLines
-        {
-            get => (uint)_lines.Where(x => !string.IsNullOrEmpty(x.Value.Port)).Count();
-        }
-        public List<string>? UsedPorts
-        {
-            get => _lines.Where(x => !string.IsNullOrEmpty(x.Value.Base) && !string.IsNullOrEmpty(x.Value.Port)).Select(x => x.Value.Port).Distinct().ToList()!;
-        }
-        public uint TotalIPs
-        {
-            get => (uint)_lines.Where(x => !string.IsNullOrEmpty(x.Value.Base) && !string.IsNullOrEmpty(x.Value.IP)).Select(x => x.Value.IP).Count();
-        }
-        public uint InvalidIPs
-        {
-            get => (uint)_lines.Where(x => !string.IsNullOrEmpty(x.Value.Base) && !string.IsNullOrEmpty(x.Value.IP)).Select(x => x.Value.IP).Where(x => !IPAddress.TryParse(x, out _)).ToList().Count;
-        }
-        public uint DuplicatedIPs
-        {
-            get => (uint)_lines.Where(x => !string.IsNullOrEmpty(x.Value.Base) && !string.IsNullOrEmpty(x.Value.IP)).GroupBy(x => x.Value.IP).Where(g => g.Count() > 1).Select(g => g.Key).Count();
-        }
-        public uint ValidIPs
-        {
-            get => (uint)_lines.Where(x => !string.IsNullOrEmpty(x.Value.Base) && !string.IsNullOrEmpty(x.Value.IP)).Select(x => x.Value.IP).Distinct().Where(x => IPAddress.TryParse(x, out _)).ToList().Count;
-        }
-        public List<string> OrderByDescending
-        {
-            get
-            {
-                var result = new List<string>();
+        public uint FreshTotalLines => (uint)_lines!.Count;
+        public uint EmptyLines => _emptyLines;
+        public uint DuplicatedLines => _duplicatedLines;
+        public uint LinesWithLetters => _linesWithLetters;
+        public uint LinesWithPort => _linesWithPort;
+        public List<string> UsedPorts => _usedPorts.Distinct().ToList();
+        public uint TotalIPs => _totalIPs;
+        public uint InvalidIPs => _invalidIPs;
+        public uint DuplicatedIPs => _duplicatedIPs;
+        public uint ValidIPs => _validIPs;
 
-                var nonIpLines = _lines.Where(x => !string.IsNullOrEmpty(x.Value.Base) && string.IsNullOrEmpty(x.Value.IP)).ToList();
-                foreach (var line in nonIpLines)
-                {
-                    _lines.TryRemove(line.Key, out _);
-                }
-                var nonIpsToWrite = nonIpLines.Select(kvp => new LineModel()
-                {
-                    Base = kvp.Value.Base,
-                    IP = null,
-                    Port = kvp.Value.Port,
-                    Letters = kvp.Value.Letters,
-                    Bytes = null
-                }).ToList();
-
-                var ipLines = _lines
-                    .Select(kvp => new LineModel()
-                    {
-                        Base = kvp.Value.Base,
-                        IP = kvp.Value.IP,
-                        Port = kvp.Value.Port,
-                        Letters = kvp.Value.Letters,
-                        Bytes = kvp.Value.Bytes
-                    })
-                    .OrderByDescending(x => x.Bytes![0])
-                    .ThenByDescending(x => x.Bytes![1])
-                    .ThenByDescending(x => x.Bytes![2])
-                    .ThenByDescending(x => x.Bytes![3])
-                    .ToList();
-                foreach (var kvp in ipLines)
-                {
-                    string? firstLetters = (kvp.Letters.Count > 0 && kvp.Letters.Any(x => x.StartsWith("f:"))) ? kvp.Letters.Single(x => x.StartsWith("f:")).Remove(0, 2) : null;
-                    string? endLetters = (kvp.Letters.Count > 0 && kvp.Letters.Any(x => x.StartsWith("e:"))) ? kvp.Letters.Single(x => x.StartsWith("e:")).Remove(0, 2) : null;
-                    string? ip = (kvp.IP != string.Empty) ? kvp.IP : null;
-                    string? port = (kvp.Port != string.Empty) ? $":{kvp.Port}" : null;
-
-                    result.Add($"{firstLetters}{ip}{port}{endLetters}");
-                }
-
-                
-                foreach (var kvp in nonIpsToWrite)
-                {
-                    string? firstLetters = (kvp.Letters.Count > 0 && kvp.Letters.Any(x => x.StartsWith("f:"))) ? kvp.Letters.Single(x => x.StartsWith("f:")).Remove(0, 2) : null;
-                    string? endLetters = (kvp.Letters.Count > 0 && kvp.Letters.Any(x => x.StartsWith("e:"))) ? kvp.Letters.Single(x => x.StartsWith("e:")).Remove(0, 2) : null;
-                    string? port = (kvp.Port != string.Empty) ? $":{kvp.Port}" : null;
-
-                    result.Add($"{firstLetters}{port}{endLetters}");
-                }
-
-                return result;
-            }
-        }
-        public List<string> OrderByAscending
-        {
-            get
-            {
-                var result = new List<string>();
-
-                var nonIpLines = _lines.Where(x => !string.IsNullOrEmpty(x.Value.Base) && string.IsNullOrEmpty(x.Value.IP)).ToList();
-                foreach (var line in nonIpLines)
-                {
-                    _lines.TryRemove(line.Key, out _);
-                }
-                var nonIpsToWrite = nonIpLines.Select(kvp => new LineModel()
-                {
-                    Base = kvp.Value.Base,
-                    IP = null,
-                    Port = kvp.Value.Port,
-                    Letters = kvp.Value.Letters,
-                    Bytes = null
-                }).ToList();
-                foreach (var kvp in nonIpsToWrite)
-                {
-                    string? firstLetters = (kvp.Letters.Count > 0 && kvp.Letters.Any(x => x.StartsWith("f:"))) ? kvp.Letters.Single(x => x.StartsWith("f:")).Remove(0, 2) : null;
-                    string? endLetters = (kvp.Letters.Count > 0 && kvp.Letters.Any(x => x.StartsWith("e:"))) ? kvp.Letters.Single(x => x.StartsWith("e:")).Remove(0, 2) : null;
-                    string? port = (kvp.Port != string.Empty) ? $":{kvp.Port}" : null;
-
-                    result.Add($"{firstLetters}{port}{endLetters}");
-                }
-
-                var ipLines = _lines
-                    .Select(kvp => new LineModel()
-                    {
-                        Base = kvp.Value.Base,
-                        IP = kvp.Value.IP,
-                        Port = kvp.Value.Port,
-                        Letters = kvp.Value.Letters,
-                        Bytes = kvp.Value.Bytes
-                    })
-                    .OrderBy(x => x.Bytes![0])
-                    .ThenBy(x => x.Bytes![1])
-                    .ThenBy(x => x.Bytes![2])
-                    .ThenBy(x => x.Bytes![3])
-                    .ToList();
-                foreach (var kvp in ipLines)
-                {
-                    string? firstLetters = (kvp.Letters.Count > 0 && kvp.Letters.Any(x => x.StartsWith("f:"))) ? kvp.Letters.Single(x => x.StartsWith("f:")).Remove(0, 2) : null;
-                    string? endLetters = (kvp.Letters.Count > 0 && kvp.Letters.Any(x => x.StartsWith("e:"))) ? kvp.Letters.Single(x => x.StartsWith("e:")).Remove(0, 2) : null;
-                    string? ip = (kvp.IP != string.Empty) ? kvp.IP : null;
-                    string? port = (kvp.Port != string.Empty) ? $":{kvp.Port}" : null;
-
-                    result.Add($"{firstLetters}{ip}{port}{endLetters}");
-                }
-
-                return result;
-            }
-        }
-        public List<string> GetAllToWrite
-        {
-            get
-            {
-                var list = new List<string>();
-                foreach (var kvp in _lines)
-                {
-                    string? firstLetters = (kvp.Value.Letters.Count > 0 && kvp.Value.Letters.Any(x => x.StartsWith("f:"))) ? kvp.Value.Letters.Single(x => x.StartsWith("f:")).Remove(0, 2) : null;
-                    string? endLetters = (kvp.Value.Letters.Count > 0 && kvp.Value.Letters.Any(x => x.StartsWith("e:"))) ? kvp.Value.Letters.Single(x => x.StartsWith("e:")).Remove(0, 2) : null;
-                    string? ip = (kvp.Value.IP != string.Empty) ? kvp.Value.IP : null;
-                    string? port = (kvp.Value.Port != string.Empty) ? $":{kvp.Value.Port}" : null;
-
-                    list.Add($"{firstLetters}{ip}{port}{endLetters}");
-                }
-                return list;
-            }
-        }
 
         //methods
-        public bool Add(uint index, LineModel ln)
+        private async Task<bool> RecomputeStatisticsAsync(string? @base, string? ip, string? port, List<string>? letters)
         {
-            if (_lines.TryAdd(index, ln)) return true;
+            if (@base == null)
+                this._emptyLines++;
+            else
+            {
+                if (letters != null)
+                    _linesWithLetters++;
+                if (port != null)
+                {
+                    this._linesWithPort++;
+                    this._usedPorts.Add(port);
+                }
+                if (ip != null)
+                    this._totalIPs++;
+            }
+
+            return true;
+        }
+        public async Task<bool> RecomputeHeavyStatisticsAsync()
+        {
+            _duplicatedLines = (uint)_lines!.Where(x => x.Value.Base != null).GroupBy(x => x.Value.Base).Count(g => g.Count() > 1);
+            _duplicatedIPs = (uint)_lines!.Where(x => x.Value.IP != null).GroupBy(x => x.Value.IP).Count(g => g.Count() > 1);
+            _invalidIPs = (uint)_lines!.Where(x => x.Value.IP != null).Select(x => x.Value.IP).Distinct().Count(x => x != null && !IPAddress.TryParse(x, out _));
+            _validIPs = (uint)_lines!.Where(x => x.Value.IP != null).Select(x => x.Value.IP).Distinct().Count(x => x != null && IPAddress.TryParse(x, out _));
+            return true;
+        }
+        public async Task<bool> AddAsync(uint index, LineModel ln)
+        {
+            if (_lines!.TryAdd(index, ln)) return true;
             else return false;
         }
-        public bool Add(uint index, string? @base, string? ip, string? port, List<string> letters, byte[]? bytes)
+        public async Task<bool> AddAsync(uint index, string? @base = null, string? ip = null, string? port = null, List<string>? letters = null, byte[]? bytes = null)
         {
             LineModel ln = new()
             {
-                Base = @base,
-                IP = ip,
-                Port = port,
-                Letters = letters,
-                Bytes = bytes
+                Base = (@base != null) ? @base : null,
+                IP = (ip != null) ? ip : null,
+                Port = (port != null) ? port : null,
+                Letters = (letters != null) ? letters : null,
+                Bytes = (bytes != null) ? bytes : null
             };
-            return Add(index, ln);
-        }
-        public bool KeyExist(uint i)
-        {
-            return _lines.ContainsKey(i);
+
+            await RecomputeStatisticsAsync(@base, ip, port, letters);
+            return await AddAsync(index, ln);
         }
 
         public async Task NullFixHandler()
         {
-            var nulls = _lines.Where(x => x.Value.Base == "" || x.Value.Base == string.Empty).ToList();
+            var nulls = _lines!.Where(x => x.Value.Base == null).ToList();
 
             for (int i = 0; i < nulls.Count; i++)
             {
-                _lines.TryRemove(nulls[i].Key, out _);
+                _lines!.TryRemove(nulls[i].Key, out _);
             }
         }
         public async Task DeDupHandler()
         {
-            var keys = _lines.Keys.ToArray();
+            var keys = _lines!.Keys.ToArray();
 
             await DedupByBaseAsync(keys);
 
@@ -226,68 +107,68 @@ namespace IP_File_Normalizer.Repository
         }
         public async Task InFixHandler()
         {
-            var invalidIPsBase = _lines.Where(x => !string.IsNullOrEmpty(x.Value.Base) && !string.IsNullOrEmpty(x.Value.IP)).Where(x => !IPAddress.TryParse(x.Value.IP, out _)).ToList();
+            var invalidIPsBase = _lines!.Where(x => x.Value.Base != null && x.Value.IP != null).Where(x => !IPAddress.TryParse(x.Value.IP, out _)).ToList();
             for (int i = 0; i < invalidIPsBase.Count; i++)
             {
-                if (_lines[invalidIPsBase[i].Key].Port == string.Empty && _lines[invalidIPsBase[i].Key].Letters.Count == 0)
-                    _lines.TryRemove(invalidIPsBase[i].Key, out _);
+                if (_lines![invalidIPsBase[i].Key].Port == null && _lines![invalidIPsBase[i].Key].Letters == null)
+                    _lines!.TryRemove(invalidIPsBase[i].Key, out _);
                 else
                 {
                     _lines[invalidIPsBase[i].Key].Base!.Replace(_lines[invalidIPsBase[i].Key].IP!, string.Empty);
 
-                    _lines[invalidIPsBase[i].Key].IP = string.Empty;
+                    _lines[invalidIPsBase[i].Key].IP = null;
                     _lines[invalidIPsBase[i].Key].Bytes = null;
                 }
             }
         }
         public async Task LetOutHandler()
         {
-            var letteredBase = _lines.Where(x => x.Value.Letters.Count > 0).ToList();
+            var letteredBase = _lines!.Where(x => x.Value.Letters != null).ToList();
             for (int i = 0; i < letteredBase.Count; i++)
             {
-                if (_lines[letteredBase[i].Key].Port == string.Empty && _lines[letteredBase[i].Key].IP == string.Empty)
-                    _lines.TryRemove(letteredBase[i].Key, out _);
+                if (_lines![letteredBase[i].Key].Port == null && _lines[letteredBase[i].Key].IP == null)
+                    _lines!.TryRemove(letteredBase[i].Key, out _);
 
                 else
                 {
-                    foreach (var lt in _lines[letteredBase[i].Key].Letters)
+                    foreach (var lt in _lines[letteredBase[i].Key].Letters!)
                     {
                         _lines[letteredBase[i].Key].Base!.Replace(lt.Remove(0, 2), string.Empty);
                     }
 
 
-                    _lines[letteredBase[i].Key].Letters.Clear();
+                    _lines[letteredBase[i].Key].Letters = null;
                 }
             }
         }
         public async Task DePortHandler()
         {
-            var portedBase = _lines.Where(x => !string.IsNullOrEmpty(x.Value.Base) && !string.IsNullOrEmpty(x.Value.Port)).ToList();
+            var portedBase = _lines!.Where(x => x.Value.Base != null && x.Value.Port != null).ToList();
             for (int i = 0; i < portedBase.Count; i++)
             {
-                if (_lines[portedBase[i].Key].IP == string.Empty && _lines[portedBase[i].Key].Letters.Count == 0)
-                    _lines.TryRemove(portedBase[i].Key, out _);
+                if (_lines![portedBase[i].Key].IP == null && _lines[portedBase[i].Key].Letters == null)
+                    _lines!.TryRemove(portedBase[i].Key, out _);
 
                 else
                 {
                     _lines[portedBase[i].Key].Base!.Replace(_lines[portedBase[i].Key].Port!, string.Empty);
 
-                    _lines[portedBase[i].Key].Port = string.Empty;
+                    _lines[portedBase[i].Key].Port = null;
                 }
             }
         }
         public async Task Del4Handler()
         {
-            var del4Base = _lines.Where(x => !string.IsNullOrEmpty(x.Value.Base) && !string.IsNullOrEmpty(x.Value.IP)).ToList();
+            var del4Base = _lines!.Where(x => x.Value.Base != null && x.Value.IP != null).ToList();
             for (int i = 0; i < del4Base.Count; i++)
             {
-                if (_lines[del4Base[i].Key].Port == string.Empty && _lines[del4Base[i].Key].Letters.Count == 0)
-                    _lines.TryRemove(del4Base[i].Key, out _);
+                if (_lines![del4Base[i].Key].Port == null && _lines[del4Base[i].Key].Letters == null)
+                    _lines!.TryRemove(del4Base[i].Key, out _);
                 else
                 {
                     _lines[del4Base[i].Key].Base!.Replace(_lines[del4Base[i].Key].IP!, string.Empty);
 
-                    _lines[del4Base[i].Key].IP = string.Empty;
+                    _lines[del4Base[i].Key].IP = null;
                     _lines[del4Base[i].Key].Bytes = null;
                 }
             }
@@ -300,7 +181,7 @@ namespace IP_File_Normalizer.Repository
             await Parallel.ForEachAsync(keys, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount },
                 async (key, ct) =>
                 {
-                    if (!_lines.TryGetValue(key, out var item) || string.IsNullOrEmpty(item.Base))
+                    if (!_lines!.TryGetValue(key, out var item) || item.Base == null)
                         return;
 
                     var baseValue = item.Base;
@@ -312,7 +193,7 @@ namespace IP_File_Normalizer.Repository
 
                     if (seenBase[baseValue] != key)
                     {
-                        _lines.TryRemove(key, out _);
+                        _lines!.TryRemove(key, out _);
                     }
                 });
         }
@@ -320,15 +201,12 @@ namespace IP_File_Normalizer.Repository
         {
             var seenIP = new ConcurrentDictionary<string, uint>();
 
-            var keys = _lines.Keys.ToArray();
+            var keys = _lines!.Keys.ToArray();
 
             await Parallel.ForEachAsync(keys, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount },
                 async (key, ct) =>
                 {
-                    if (!_lines.TryGetValue(key, out var item))
-                        return;
-
-                    if (string.IsNullOrEmpty(item.Base) || string.IsNullOrEmpty(item.IP))
+                    if (!_lines!.TryGetValue(key, out var item) || item.Base == null || item.IP == null)
                         return;
 
                     var ip = item.IP;
@@ -341,22 +219,49 @@ namespace IP_File_Normalizer.Repository
                         return;
 
 
-                    if (string.IsNullOrEmpty(item.Port) && (item.Letters?.Count ?? 0) == 0)
+                    if (item.Port == null && item.Letters == null)
                     {
-                        _lines.TryRemove(key, out _);
+                        _lines!.TryRemove(key, out _);
                     }
                     else
                     {
 
-                        if (!string.IsNullOrEmpty(item.Base) && !string.IsNullOrEmpty(item.IP))
+                        if (item.Base != null && item.IP != null)
                         {
                             item.Base = item.Base.Replace(item.IP, string.Empty).Trim();
                         }
 
-                        item.IP = string.Empty;
+                        item.IP = null;
                         item.Bytes = null;
                     }
                 });
+        }
+
+        public async Task<List<LineModel>?> FilterLinesAsync(Func<LineModel, bool>? condition = null)
+        {
+            if (_lines == null) return null;
+            if (condition == null) return _lines.Values.ToList();
+            return _lines.Values.Where(condition).ToList();
+        }
+
+        private bool _disposed = false;
+        private void Dispose(bool disposing)
+        {
+            if (_disposed) return;
+
+            if (disposing)
+            {
+                if (_lines != null)
+                    this._lines!.Clear();
+                this._lines = null;
+            }
+
+            this._disposed = true;
+        }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }
