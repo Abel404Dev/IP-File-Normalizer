@@ -11,11 +11,6 @@
 [![Linux](https://img.shields.io/badge/Linux-Supported-FCC624?logo=linux\&logoColor=black)]()
 [![macOS](https://img.shields.io/badge/macOS-Supported-000000?logo=apple)]()
 
-[![GitHub Stars](https://img.shields.io/github/stars/Abel404Dev/IP-File-Normalizer?style=for-the-badge)]()
-[![GitHub Forks](https://img.shields.io/github/forks/Abel404Dev/IP-File-Normalizer?style=for-the-badge)]()
-[![GitHub Issues](https://img.shields.io/github/issues/Abel404Dev/IP-File-Normalizer?style=for-the-badge)]()
-[![GitHub Downloads](https://img.shields.io/github/downloads/Abel404Dev/IP-File-Normalizer/total?style=for-the-badge)]()
-
 ---
 
 ### ⚡ Fast • Lightweight • Memory Efficient • Multi-File IP Processing • Cross-Platform • Self-Contained
@@ -32,6 +27,8 @@ A high-performance .NET 10 utility for cleaning, normalizing, merging, deduplica
 
 - [📖 Overview](#-overview)
 
+- [🏗 Architecture](#-architecture)
+
 - [📁 Supported Input Formats](#-supported-input-formats)
 
 - [💻 User Interface](#-user-interface)
@@ -45,6 +42,8 @@ A high-performance .NET 10 utility for cleaning, normalizing, merging, deduplica
 - [🚀 Quick Start](#-quick-start)
 
 - [📋 Usage](#-usage)
+
+- [⚠️ Operation Priority Rules](#-operation-priority-rules)
 
 - [📸 Examples](#-examples)
 
@@ -85,6 +84,37 @@ IP File Normalizer is a high-speed cross-platform command-line application desig
 
 ---
 
+## 🏗 Architecture
+
+### Core Components
+
+| Component | Responsibility |
+|------------|---------------|
+| 🚀 Program | Application workflow |
+| 📂 DirHandler | Directory creation and file validation |
+| 📊 UIHandler | Console UI and progress reporting |
+| 🧠 LineRepository | In-memory data management |
+| 💾 ResultHandler | Result file generation |
+| 🔧 Utility | Parsing, regex extraction and helper methods |
+
+### Processing Model
+
+```text
+Input Files
+      ↓
+LineRepository
+      ↓
+Statistics Engine
+      ↓
+Selected Operation
+      ↓
+ResultHandler
+      ↓
+Output File
+```
+
+
+---
 ## 📁 Supported Input Formats
 IP File Normalizer is designed to work exclusively with plain text files.
 
@@ -609,37 +639,6 @@ If you have ideas, bug reports or improvements:
 - Open an Issue
 - Submit a Pull Request
 - Suggest New Features
-
----
-
-## 🏗 Architecture
-
-### Core Components
-
-| Component | Responsibility |
-|------------|---------------|
-| 🚀 Program | Application workflow |
-| 📂 DirHandler | Directory creation and file validation |
-| 📊 UIHandler | Console UI and progress reporting |
-| 🧠 LineRepository | In-memory data management |
-| 💾 ResultHandler | Result file generation |
-| 🔧 Utility | Parsing, regex extraction and helper methods |
-
-### Processing Model
-
-```text
-Input Files
-      ↓
-LineRepository
-      ↓
-Statistics Engine
-      ↓
-Selected Operation
-      ↓
-ResultHandler
-      ↓
-Output File
-```
 
 ---
 
